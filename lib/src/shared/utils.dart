@@ -4,15 +4,15 @@
 import 'package:flutter/widgets.dart';
 
 /// Signature for a function that creates a widget for a given `day`.
-typedef DayBuilder = Widget? Function(BuildContext context, DateTime day);
+typedef DayBuilder = Widget? Function(BuildContext context, NepaliDateTime day);
 
 /// Signature for a function that creates a widget for a given `day`.
 /// Additionally, contains the currently focused day.
 typedef FocusedDayBuilder = Widget? Function(
-    BuildContext context, DateTime day, DateTime focusedDay);
+    BuildContext context, NepaliDateTime day, NepaliDateTime focusedDay);
 
 /// Signature for a function returning text that can be localized and formatted with `DateFormat`.
-typedef TextFormatter = String Function(DateTime date, dynamic locale);
+typedef TextFormatter = String Function(NepaliDateTime date, dynamic locale);
 
 /// Gestures available for the calendar.
 enum AvailableGestures { none, verticalSwipe, horizontalSwipe, all }
@@ -39,13 +39,13 @@ int getWeekdayNumber(StartingDayOfWeek weekday) {
 }
 
 /// Returns `date` in UTC format, without its time part.
-DateTime normalizeDate(DateTime date) {
-  return DateTime.utc(date.year, date.month, date.day);
+NepaliDateTime normalizeDate(NepaliDateTime date) {
+  return NepaliDateTime.utc(date.year, date.month, date.day);
 }
 
-/// Checks if two DateTime objects are the same day.
+/// Checks if two NepaliDateTime  objects are the same day.
 /// Returns `false` if either of them is null.
-bool isSameDay(DateTime? a, DateTime? b) {
+bool isSameDay(NepaliDateTime? a, NepaliDateTime? b) {
   if (a == null || b == null) {
     return false;
   }

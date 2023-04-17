@@ -18,12 +18,12 @@ import 'widgets/cell_content.dart';
 
 /// Signature for `onDaySelected` callback. Contains the selected day and focused day.
 typedef OnDaySelected = void Function(
-    DateTime selectedDay, DateTime focusedDay);
+    NepaliDateTime selectedDay, NepaliDateTime focusedDay);
 
 /// Signature for `onRangeSelected` callback.
 /// Contains start and end of the selected range, as well as currently focused day.
 typedef OnRangeSelected = void Function(
-    DateTime? start, DateTime? end, DateTime focusedDay);
+    NepaliDateTime? start, NepaliDateTime? end, NepaliDateTime focusedDay);
 
 /// Modes that range selection can operate in.
 enum RangeSelectionMode { disabled, toggledOff, toggledOn, enforced }
@@ -36,33 +36,33 @@ class TableCalendar<T> extends StatefulWidget {
   final dynamic locale;
 
   /// The start of the selected day range.
-  final DateTime? rangeStartDay;
+  final NepaliDateTime? rangeStartDay;
 
   /// The end of the selected day range.
-  final DateTime? rangeEndDay;
+  final NepaliDateTime? rangeEndDay;
 
-  /// DateTime that determines which days are currently visible and focused.
-  final DateTime focusedDay;
+  /// NepaliDateTime  that determines which days are currently visible and focused.
+  final NepaliDateTime focusedDay;
 
   /// The first active day of `TableCalendar`.
   /// Blocks swiping to days before it.
   ///
   /// Days before it will use `disabledStyle` and trigger `onDisabledDayTapped` callback.
-  final DateTime firstDay;
+  final NepaliDateTime firstDay;
 
   /// The last active day of `TableCalendar`.
   /// Blocks swiping to days after it.
   ///
   /// Days after it will use `disabledStyle` and trigger `onDisabledDayTapped` callback.
-  final DateTime lastDay;
+  final NepaliDateTime lastDay;
 
-  /// DateTime that will be treated as today. Defaults to `DateTime.now()`.
+  /// NepaliDateTime  that will be treated as today. Defaults to `NepaliDateTime .now()`.
   ///
   /// Overriding this property might be useful for testing.
-  final DateTime? currentDay;
+  final NepaliDateTime? currentDay;
 
   /// List of days treated as weekend days.
-  /// Use built-in `DateTime` weekday constants (e.g. `DateTime.monday`) instead of `int` literals (e.g. `1`).
+  /// Use built-in `NepaliDateTime ` weekday constants (e.g. `NepaliDateTime .monday`) instead of `int` literals (e.g. `1`).
   final List<int> weekendDays;
 
   /// Specifies `TableCalendar`'s current format.
@@ -162,17 +162,17 @@ class TableCalendar<T> extends StatefulWidget {
   final RangeSelectionMode rangeSelectionMode;
 
   /// Function that assigns a list of events to a specified day.
-  final List<T> Function(DateTime day)? eventLoader;
+  final List<T> Function(NepaliDateTime day)? eventLoader;
 
   /// Function deciding whether given day should be enabled or not.
   /// If `false` is returned, this day will be disabled.
-  final bool Function(DateTime day)? enabledDayPredicate;
+  final bool Function(NepaliDateTime day)? enabledDayPredicate;
 
   /// Function deciding whether given day should be marked as selected.
-  final bool Function(DateTime day)? selectedDayPredicate;
+  final bool Function(NepaliDateTime day)? selectedDayPredicate;
 
   /// Function deciding whether given day is treated as a holiday.
-  final bool Function(DateTime day)? holidayPredicate;
+  final bool Function(NepaliDateTime day)? holidayPredicate;
 
   /// Called whenever a day range gets selected.
   final OnRangeSelected? onRangeSelected;
@@ -184,19 +184,19 @@ class TableCalendar<T> extends StatefulWidget {
   final OnDaySelected? onDayLongPressed;
 
   /// Called whenever any disabled day gets tapped.
-  final void Function(DateTime day)? onDisabledDayTapped;
+  final void Function(NepaliDateTime day)? onDisabledDayTapped;
 
   /// Called whenever any disabled day gets long pressed.
-  final void Function(DateTime day)? onDisabledDayLongPressed;
+  final void Function(NepaliDateTime day)? onDisabledDayLongPressed;
 
   /// Called whenever header gets tapped.
-  final void Function(DateTime focusedDay)? onHeaderTapped;
+  final void Function(NepaliDateTime focusedDay)? onHeaderTapped;
 
   /// Called whenever header gets long pressed.
-  final void Function(DateTime focusedDay)? onHeaderLongPressed;
+  final void Function(NepaliDateTime focusedDay)? onHeaderLongPressed;
 
   /// Called whenever currently visible calendar page is changed.
-  final void Function(DateTime focusedDay)? onPageChanged;
+  final void Function(NepaliDateTime focusedDay)? onPageChanged;
 
   /// Called whenever `calendarFormat` is changed.
   final void Function(CalendarFormat format)? onFormatChanged;
@@ -207,14 +207,14 @@ class TableCalendar<T> extends StatefulWidget {
   /// Creates a `TableCalendar` widget.
   TableCalendar({
     Key? key,
-    required DateTime focusedDay,
-    required DateTime firstDay,
-    required DateTime lastDay,
-    DateTime? currentDay,
+    required NepaliDateTime focusedDay,
+    required NepaliDateTime firstDay,
+    required NepaliDateTime lastDay,
+    NepaliDateTime? currentDay,
     this.locale,
     this.rangeStartDay,
     this.rangeEndDay,
-    this.weekendDays = const [DateTime.saturday, DateTime.sunday],
+    this.weekendDays = const [NepaliDateTime.saturday, NepaliDateTime.sunday],
     this.calendarFormat = CalendarFormat.month,
     this.availableCalendarFormats = const {
       CalendarFormat.month: 'Month',
@@ -263,13 +263,13 @@ class TableCalendar<T> extends StatefulWidget {
   })  : assert(availableCalendarFormats.keys.contains(calendarFormat)),
         assert(availableCalendarFormats.length <= CalendarFormat.values.length),
         assert(weekendDays.isNotEmpty
-            ? weekendDays.every(
-                (day) => day >= DateTime.monday && day <= DateTime.sunday)
+            ? weekendDays.every((day) =>
+                day >= NepaliDateTime.monday && day <= NepaliDateTime.sunday)
             : true),
         focusedDay = normalizeDate(focusedDay),
         firstDay = normalizeDate(firstDay),
         lastDay = normalizeDate(lastDay),
-        currentDay = currentDay ?? DateTime.now(),
+        currentDay = currentDay ?? NepaliDateTime.now(),
         super(key: key);
 
   @override
@@ -278,9 +278,9 @@ class TableCalendar<T> extends StatefulWidget {
 
 class _TableCalendarState<T> extends State<TableCalendar<T>> {
   late final PageController _pageController;
-  late final ValueNotifier<DateTime> _focusedDay;
+  late final ValueNotifier<NepaliDateTime> _focusedDay;
   late RangeSelectionMode _rangeSelectionMode;
-  DateTime? _firstSelectedDay;
+  NepaliDateTime? _firstSelectedDay;
 
   @override
   void initState() {
@@ -343,7 +343,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     }
   }
 
-  void _onDayTapped(DateTime day) {
+  void _onDayTapped(NepaliDateTime day) {
     final isOutside = day.month != _focusedDay.value.month;
     if (isOutside && _shouldBlockOutsideDays) {
       return;
@@ -373,7 +373,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     }
   }
 
-  void _onDayLongPressed(DateTime day) {
+  void _onDayLongPressed(NepaliDateTime day) {
     final isOutside = day.month != _focusedDay.value.month;
     if (isOutside && _shouldBlockOutsideDays) {
       return;
@@ -404,7 +404,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     }
   }
 
-  void _updateFocusOnTap(DateTime day) {
+  void _updateFocusOnTap(NepaliDateTime day) {
     if (widget.pageJumpingEnabled) {
       _focusedDay.value = day;
       return;
@@ -450,7 +450,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     return Column(
       children: [
         if (widget.headerVisible)
-          ValueListenableBuilder<DateTime>(
+          ValueListenableBuilder<NepaliDateTime>(
             valueListenable: _focusedDay,
             builder: (context, value, _) {
               return CalendarHeader(
@@ -510,7 +510,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
               widget.onPageChanged?.call(focusedDay);
             },
             weekNumbersVisible: widget.weekNumbersVisible,
-            weekNumberBuilder: (BuildContext context, DateTime day) {
+            weekNumberBuilder: (BuildContext context, NepaliDateTime day) {
               final weekNumber = _calculateWeekNumber(day);
               Widget? cell = widget.calendarBuilders.weekNumberBuilder
                   ?.call(context, weekNumber);
@@ -529,7 +529,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
 
               return cell;
             },
-            dowBuilder: (BuildContext context, DateTime day) {
+            dowBuilder: (BuildContext context, NepaliDateTime day) {
               Widget? dowCell =
                   widget.calendarBuilders.dowBuilder?.call(context, day);
 
@@ -569,7 +569,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     );
   }
 
-  Widget _buildCell(DateTime day, DateTime focusedDay) {
+  Widget _buildCell(NepaliDateTime day, NepaliDateTime focusedDay) {
     final isOutside = day.month != focusedDay.month;
 
     if (isOutside && _shouldBlockOutsideDays) {
@@ -695,7 +695,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     );
   }
 
-  Widget _buildSingleMarker(DateTime day, T event, double markerSize) {
+  Widget _buildSingleMarker(NepaliDateTime day, T event, double markerSize) {
     return widget.calendarBuilders.singleMarkerBuilder
             ?.call(context, day, event) ??
         Container(
@@ -706,21 +706,22 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
         );
   }
 
-  int _calculateWeekNumber(DateTime date) {
+  int _calculateWeekNumber(NepaliDateTime date) {
     final middleDay = date.add(const Duration(days: 3));
     final dayOfYear = _dayOfYear(middleDay);
 
     return 1 + ((dayOfYear - 1) / 7).floor();
   }
 
-  int _dayOfYear(DateTime date) {
+  int _dayOfYear(NepaliDateTime date) {
     return normalizeDate(date)
-            .difference(DateTime.utc(date.year, 1, 1))
+            .difference(NepaliDateTime.utc(date.year, 1, 1))
             .inDays +
         1;
   }
 
-  bool _isWithinRange(DateTime day, DateTime start, DateTime end) {
+  bool _isWithinRange(
+      NepaliDateTime day, NepaliDateTime start, NepaliDateTime end) {
     if (isSameDay(day, start) || isSameDay(day, end)) {
       return true;
     }
@@ -732,30 +733,30 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     return false;
   }
 
-  bool _isDayDisabled(DateTime day) {
+  bool _isDayDisabled(NepaliDateTime day) {
     return day.isBefore(widget.firstDay) ||
         day.isAfter(widget.lastDay) ||
         !_isDayAvailable(day);
   }
 
-  bool _isDayAvailable(DateTime day) {
+  bool _isDayAvailable(NepaliDateTime day) {
     return widget.enabledDayPredicate == null
         ? true
         : widget.enabledDayPredicate!(day);
   }
 
-  DateTime _firstDayOfMonth(DateTime month) {
-    return DateTime.utc(month.year, month.month, 1);
+  NepaliDateTime _firstDayOfMonth(NepaliDateTime month) {
+    return NepaliDateTime.utc(month.year, month.month, 1);
   }
 
-  DateTime _lastDayOfMonth(DateTime month) {
+  NepaliDateTime _lastDayOfMonth(NepaliDateTime month) {
     final date = month.month < 12
-        ? DateTime.utc(month.year, month.month + 1, 1)
-        : DateTime.utc(month.year + 1, 1, 1);
+        ? NepaliDateTime.utc(month.year, month.month + 1, 1)
+        : NepaliDateTime.utc(month.year + 1, 1, 1);
     return date.subtract(const Duration(days: 1));
   }
 
-  bool _isBeforeMonth(DateTime day, DateTime month) {
+  bool _isBeforeMonth(NepaliDateTime day, NepaliDateTime month) {
     if (day.year == month.year) {
       return day.month < month.month;
     } else {
@@ -763,7 +764,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     }
   }
 
-  bool _isAfterMonth(DateTime day, DateTime month) {
+  bool _isAfterMonth(NepaliDateTime day, NepaliDateTime month) {
     if (day.year == month.year) {
       return day.month > month.month;
     } else {
@@ -772,8 +773,11 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
   }
 
   bool _isWeekend(
-    DateTime day, {
-    List<int> weekendDays = const [DateTime.saturday, DateTime.sunday],
+    NepaliDateTime day, {
+    List<int> weekendDays = const [
+      NepaliDateTime.saturday,
+      NepaliDateTime.sunday
+    ],
   }) {
     return weekendDays.contains(day.weekday);
   }

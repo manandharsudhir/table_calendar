@@ -13,8 +13,8 @@ class TableBasicsExample extends StatefulWidget {
 
 class _TableBasicsExampleState extends State<TableBasicsExample> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
+  NepaliDateTime _focusedDay = NepaliDateTime.now();
+  NepaliDateTime? _selectedDay;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
           // If this returns true, then `day` will be marked as selected.
 
           // Using `isSameDay` is recommended to disregard
-          // the time-part of compared DateTime objects.
+          // the time-part of compared NepaliDateTime  objects.
           return isSameDay(_selectedDay, day);
         },
         onDaySelected: (selectedDay, focusedDay) {

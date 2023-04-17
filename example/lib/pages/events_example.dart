@@ -16,10 +16,10 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
-  DateTime? _rangeStart;
-  DateTime? _rangeEnd;
+  NepaliDateTime _focusedDay = NepaliDateTime.now();
+  NepaliDateTime? _selectedDay;
+  NepaliDateTime? _rangeStart;
+  NepaliDateTime? _rangeEnd;
 
   @override
   void initState() {
@@ -35,12 +35,12 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     super.dispose();
   }
 
-  List<Event> _getEventsForDay(DateTime day) {
+  List<Event> _getEventsForDay(NepaliDateTime day) {
     // Implementation example
     return kEvents[day] ?? [];
   }
 
-  List<Event> _getEventsForRange(DateTime start, DateTime end) {
+  List<Event> _getEventsForRange(NepaliDateTime start, NepaliDateTime end) {
     // Implementation example
     final days = daysInRange(start, end);
 
@@ -49,7 +49,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     ];
   }
 
-  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+  void _onDaySelected(NepaliDateTime selectedDay, NepaliDateTime focusedDay) {
     if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
         _selectedDay = selectedDay;
@@ -63,7 +63,8 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     }
   }
 
-  void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
+  void _onRangeSelected(
+      NepaliDateTime? start, NepaliDateTime? end, NepaliDateTime focusedDay) {
     setState(() {
       _selectedDay = null;
       _focusedDay = focusedDay;

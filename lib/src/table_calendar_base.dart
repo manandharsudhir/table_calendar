@@ -8,9 +8,9 @@ import 'shared/utils.dart';
 import 'widgets/calendar_core.dart';
 
 class TableCalendarBase extends StatefulWidget {
-  final DateTime firstDay;
-  final DateTime lastDay;
-  final DateTime focusedDay;
+  final NepaliDateTime firstDay;
+  final NepaliDateTime lastDay;
+  final NepaliDateTime focusedDay;
   final CalendarFormat calendarFormat;
   final DayBuilder? dowBuilder;
   final DayBuilder? weekNumberBuilder;
@@ -34,7 +34,7 @@ class TableCalendarBase extends StatefulWidget {
   final SimpleSwipeConfig simpleSwipeConfig;
   final Map<CalendarFormat, String> availableCalendarFormats;
   final SwipeCallback? onVerticalSwipe;
-  final void Function(DateTime focusedDay)? onPageChanged;
+  final void Function(NepaliDateTime focusedDay)? onPageChanged;
   final void Function(PageController pageController)? onCalendarCreated;
 
   TableCalendarBase({
@@ -86,7 +86,7 @@ class TableCalendarBase extends StatefulWidget {
 class _TableCalendarBaseState extends State<TableCalendarBase> {
   late final ValueNotifier<double> _pageHeight;
   late final PageController _pageController;
-  late DateTime _focusedDay;
+  late NepaliDateTime _focusedDay;
   late int _previousIndex;
   late bool _pageCallbackDisabled;
 
@@ -264,8 +264,8 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
     return dowHeight + rowCount * widget.rowHeight + tablePaddingHeight;
   }
 
-  int _calculateFocusedPage(
-      CalendarFormat format, DateTime startDay, DateTime focusedDay) {
+  int _calculateFocusedPage(CalendarFormat format, NepaliDateTime startDay,
+      NepaliDateTime focusedDay) {
     switch (format) {
       case CalendarFormat.month:
         return _getMonthCount(startDay, focusedDay);
@@ -278,22 +278,22 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
     }
   }
 
-  int _getMonthCount(DateTime first, DateTime last) {
+  int _getMonthCount(NepaliDateTime first, NepaliDateTime last) {
     final yearDif = last.year - first.year;
     final monthDif = last.month - first.month;
 
     return yearDif * 12 + monthDif;
   }
 
-  int _getWeekCount(DateTime first, DateTime last) {
+  int _getWeekCount(NepaliDateTime first, NepaliDateTime last) {
     return last.difference(_firstDayOfWeek(first)).inDays ~/ 7;
   }
 
-  int _getTwoWeekCount(DateTime first, DateTime last) {
+  int _getTwoWeekCount(NepaliDateTime first, NepaliDateTime last) {
     return last.difference(_firstDayOfWeek(first)).inDays ~/ 14;
   }
 
-  int _getRowCount(CalendarFormat format, DateTime focusedDay) {
+  int _getRowCount(CalendarFormat format, NepaliDateTime focusedDay) {
     if (format == CalendarFormat.twoWeeks) {
       return 2;
     } else if (format == CalendarFormat.week) {
@@ -313,12 +313,12 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
     return (lastToDisplay.difference(firstToDisplay).inDays + 1) ~/ 7;
   }
 
-  int _getDaysBefore(DateTime firstDay) {
+  int _getDaysBefore(NepaliDateTime firstDay) {
     return (firstDay.weekday + 7 - getWeekdayNumber(widget.startingDayOfWeek)) %
         7;
   }
 
-  int _getDaysAfter(DateTime lastDay) {
+  int _getDaysAfter(NepaliDateTime lastDay) {
     int invertedStartingWeekday =
         8 - getWeekdayNumber(widget.startingDayOfWeek);
 
@@ -330,19 +330,19 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
     return daysAfter;
   }
 
-  DateTime _firstDayOfWeek(DateTime week) {
+  NepaliDateTime _firstDayOfWeek(NepaliDateTime week) {
     final daysBefore = _getDaysBefore(week);
     return week.subtract(Duration(days: daysBefore));
   }
 
-  DateTime _firstDayOfMonth(DateTime month) {
-    return DateTime.utc(month.year, month.month, 1);
+  NepaliDateTime _firstDayOfMonth(NepaliDateTime month) {
+    return NepaliDateTime.utc(month.year, month.month, 1);
   }
 
-  DateTime _lastDayOfMonth(DateTime month) {
+  NepaliDateTime _lastDayOfMonth(NepaliDateTime month) {
     final date = month.month < 12
-        ? DateTime.utc(month.year, month.month + 1, 1)
-        : DateTime.utc(month.year + 1, 1, 1);
+        ? NepaliDateTime.utc(month.year, month.month + 1, 1)
+        : NepaliDateTime.utc(month.year + 1, 1, 1);
     return date.subtract(const Duration(days: 1));
   }
 }

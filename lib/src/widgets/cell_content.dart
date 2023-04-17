@@ -8,8 +8,8 @@ import '../customization/calendar_builders.dart';
 import '../customization/calendar_style.dart';
 
 class CellContent extends StatelessWidget {
-  final DateTime day;
-  final DateTime focusedDay;
+  final NepaliDateTime day;
+  final NepaliDateTime focusedDay;
   final dynamic locale;
   final bool isTodayHighlighted;
   final bool isToday;

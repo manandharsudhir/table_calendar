@@ -11,7 +11,7 @@ import 'format_button.dart';
 
 class CalendarHeader extends StatelessWidget {
   final dynamic locale;
-  final DateTime focusedMonth;
+  final NepaliDateTime focusedMonth;
   final CalendarFormat calendarFormat;
   final HeaderStyle headerStyle;
   final VoidCallback onLeftChevronTap;

@@ -12,7 +12,7 @@ import 'package:table_calendar/src/widgets/format_button.dart';
 
 import 'common.dart';
 
-final focusedMonth = DateTime.utc(2021, 7, 15);
+final focusedMonth = NepaliDateTime.utc(2021, 7, 15);
 
 Widget setupTestWidget({
   HeaderStyle headerStyle = const HeaderStyle(),

@@ -13,16 +13,16 @@ Widget setupTestWidget(Widget child) {
   );
 }
 
-List<DateTime> visibleDays = getDaysInRange(
-  DateTime.utc(2021, 6, 27),
-  DateTime.utc(2021, 7, 31),
+List<NepaliDateTime> visibleDays = getDaysInRange(
+  NepaliDateTime.utc(2021, 6, 27),
+  NepaliDateTime.utc(2021, 7, 31),
 );
 
-List<DateTime> getDaysInRange(DateTime first, DateTime last) {
+List<NepaliDateTime> getDaysInRange(NepaliDateTime first, NepaliDateTime last) {
   final dayCount = last.difference(first).inDays + 1;
   return List.generate(
     dayCount,
-    (index) => DateTime.utc(first.year, first.month, first.day + index),
+    (index) => NepaliDateTime.utc(first.year, first.month, first.day + index),
   );
 }
 
@@ -136,7 +136,7 @@ void main() {
           },
           dowHeight: 5,
           weekNumberVisible: true,
-          weekNumberBuilder: (BuildContext context, DateTime day) {
+          weekNumberBuilder: (BuildContext context, NepaliDateTime day) {
             return Text(day.weekday.toString());
           },
         ),
@@ -148,5 +148,4 @@ void main() {
       );
     },
   );
-
 }

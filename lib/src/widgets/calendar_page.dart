@@ -4,10 +4,11 @@
 import 'package:flutter/widgets.dart';
 
 class CalendarPage extends StatelessWidget {
-  final Widget Function(BuildContext context, DateTime day)? dowBuilder;
-  final Widget Function(BuildContext context, DateTime day) dayBuilder;
-  final Widget Function(BuildContext context, DateTime day)? weekNumberBuilder;
-  final List<DateTime> visibleDays;
+  final Widget Function(BuildContext context, NepaliDateTime day)? dowBuilder;
+  final Widget Function(BuildContext context, NepaliDateTime day) dayBuilder;
+  final Widget Function(BuildContext context, NepaliDateTime day)?
+      weekNumberBuilder;
+  final List<NepaliDateTime> visibleDays;
   final Decoration? dowDecoration;
   final Decoration? rowDecoration;
   final TableBorder? tableBorder;

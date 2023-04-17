@@ -137,7 +137,7 @@
 
 ## [1.2.4]
 
-* Improved DateTime logic
+* Improved NepaliDateTime  logic
 * Event markers can now be set to overflow cell boundaries
 
 ## [1.2.3]
@@ -205,7 +205,7 @@
 ## [1.0.0]
 
 * Added custom Builders API
-* Added DateTime truncation logic
+* Added NepaliDateTime  truncation logic
 * onDaySelected callback now contains list of events associated with that day
 * Added onVisibleDaysChanged callback
 * SwipeConfig can now be customized
@@ -235,7 +235,7 @@
 
 ## [0.2.2]
 
-* Added optional initial Date (defaults to DateTime.now())
+* Added optional initial Date (defaults to NepaliDateTime .now())
 
 ## [0.2.1]
 

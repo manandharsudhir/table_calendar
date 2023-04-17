@@ -16,8 +16,9 @@ class TableComplexExample extends StatefulWidget {
 
 class _TableComplexExampleState extends State<TableComplexExample> {
   late final ValueNotifier<List<Event>> _selectedEvents;
-  final ValueNotifier<DateTime> _focusedDay = ValueNotifier(DateTime.now());
-  final Set<DateTime> _selectedDays = LinkedHashSet<DateTime>(
+  final ValueNotifier<NepaliDateTime> _focusedDay =
+      ValueNotifier(NepaliDateTime.now());
+  final Set<NepaliDateTime> _selectedDays = LinkedHashSet<NepaliDateTime>(
     equals: isSameDay,
     hashCode: getHashCode,
   );
@@ -25,8 +26,8 @@ class _TableComplexExampleState extends State<TableComplexExample> {
   late PageController _pageController;
   CalendarFormat _calendarFormat = CalendarFormat.month;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode.toggledOff;
-  DateTime? _rangeStart;
-  DateTime? _rangeEnd;
+  NepaliDateTime? _rangeStart;
+  NepaliDateTime? _rangeEnd;
 
   @override
   void initState() {
@@ -46,22 +47,22 @@ class _TableComplexExampleState extends State<TableComplexExample> {
   bool get canClearSelection =>
       _selectedDays.isNotEmpty || _rangeStart != null || _rangeEnd != null;
 
-  List<Event> _getEventsForDay(DateTime day) {
+  List<Event> _getEventsForDay(NepaliDateTime day) {
     return kEvents[day] ?? [];
   }
 
-  List<Event> _getEventsForDays(Iterable<DateTime> days) {
+  List<Event> _getEventsForDays(Iterable<NepaliDateTime> days) {
     return [
       for (final d in days) ..._getEventsForDay(d),
     ];
   }
 
-  List<Event> _getEventsForRange(DateTime start, DateTime end) {
+  List<Event> _getEventsForRange(NepaliDateTime start, NepaliDateTime end) {
     final days = daysInRange(start, end);
     return _getEventsForDays(days);
   }
 
-  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+  void _onDaySelected(NepaliDateTime selectedDay, NepaliDateTime focusedDay) {
     setState(() {
       if (_selectedDays.contains(selectedDay)) {
         _selectedDays.remove(selectedDay);
@@ -78,7 +79,8 @@ class _TableComplexExampleState extends State<TableComplexExample> {
     _selectedEvents.value = _getEventsForDays(_selectedDays);
   }
 
-  void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
+  void _onRangeSelected(
+      NepaliDateTime? start, NepaliDateTime? end, NepaliDateTime focusedDay) {
     setState(() {
       _focusedDay.value = focusedDay;
       _rangeStart = start;
@@ -104,14 +106,14 @@ class _TableComplexExampleState extends State<TableComplexExample> {
       ),
       body: Column(
         children: [
-          ValueListenableBuilder<DateTime>(
+          ValueListenableBuilder<NepaliDateTime>(
             valueListenable: _focusedDay,
             builder: (context, value, _) {
               return _CalendarHeader(
                 focusedDay: value,
                 clearButtonVisible: canClearSelection,
                 onTodayButtonTap: () {
-                  setState(() => _focusedDay.value = DateTime.now());
+                  setState(() => _focusedDay.value = NepaliDateTime.now());
                 },
                 onClearButtonTap: () {
                   setState(() {
@@ -195,7 +197,7 @@ class _TableComplexExampleState extends State<TableComplexExample> {
 }
 
 class _CalendarHeader extends StatelessWidget {
-  final DateTime focusedDay;
+  final NepaliDateTime focusedDay;
   final VoidCallback onLeftArrowTap;
   final VoidCallback onRightArrowTap;
   final VoidCallback onTodayButtonTap;

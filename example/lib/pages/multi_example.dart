@@ -17,13 +17,13 @@ class _TableMultiExampleState extends State<TableMultiExample> {
   final ValueNotifier<List<Event>> _selectedEvents = ValueNotifier([]);
 
   // Using a `LinkedHashSet` is recommended due to equality comparison override
-  final Set<DateTime> _selectedDays = LinkedHashSet<DateTime>(
+  final Set<NepaliDateTime> _selectedDays = LinkedHashSet<NepaliDateTime>(
     equals: isSameDay,
     hashCode: getHashCode,
   );
 
   CalendarFormat _calendarFormat = CalendarFormat.month;
-  DateTime _focusedDay = DateTime.now();
+  NepaliDateTime _focusedDay = NepaliDateTime.now();
 
   @override
   void dispose() {
@@ -31,12 +31,12 @@ class _TableMultiExampleState extends State<TableMultiExample> {
     super.dispose();
   }
 
-  List<Event> _getEventsForDay(DateTime day) {
+  List<Event> _getEventsForDay(NepaliDateTime day) {
     // Implementation example
     return kEvents[day] ?? [];
   }
 
-  List<Event> _getEventsForDays(Set<DateTime> days) {
+  List<Event> _getEventsForDays(Set<NepaliDateTime> days) {
     // Implementation example
     // Note that days are in selection order (same applies to events)
     return [
@@ -44,7 +44,7 @@ class _TableMultiExampleState extends State<TableMultiExample> {
     ];
   }
 
-  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+  void _onDaySelected(NepaliDateTime selectedDay, NepaliDateTime focusedDay) {
     setState(() {
       _focusedDay = focusedDay;
       // Update values in a Set

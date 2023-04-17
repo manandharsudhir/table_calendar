@@ -46,9 +46,9 @@ dependencies:
 
 ```dart
 TableCalendar(
-  firstDay: DateTime.utc(2010, 10, 16),
-  lastDay: DateTime.utc(2030, 3, 14),
-  focusedDay: DateTime.now(),
+  firstDay: NepaliDateTime .utc(2010, 10, 16),
+  lastDay: NepaliDateTime .utc(2030, 3, 14),
+  focusedDay: NepaliDateTime .now(),
 );
 ```
 
@@ -85,7 +85,7 @@ Those two changes will make the calendar interactive and responsive to user's in
 
 #### Updating focusedDay
 
-Setting `focusedDay` to a static value means that whenever **TableCalendar** widget rebuilds, it will use that specific `focusedDay`. You can quickly test it by using hot reload: set `focusedDay` to `DateTime.now()`, swipe to next month and trigger a hot reload - the calendar will "reset" to its initial state. To prevent this from happening, you should store and update `focusedDay` whenever any callback exposes it.
+Setting `focusedDay` to a static value means that whenever **TableCalendar** widget rebuilds, it will use that specific `focusedDay`. You can quickly test it by using hot reload: set `focusedDay` to `NepaliDateTime .now()`, swipe to next month and trigger a hot reload - the calendar will "reset" to its initial state. To prevent this from happening, you should store and update `focusedDay` whenever any callback exposes it.
 
 Add this one callback to complete the basic setup:
 
@@ -103,7 +103,7 @@ It is worth noting that you don't need to call `setState()` inside `onPageChange
 
 *The complete example is available [here](https://github.com/aleksanderwozniak/table_calendar/blob/master/example/lib/pages/events_example.dart).*
 
-You can supply custom events to **TableCalendar** widget. To do so, use `eventLoader` property - you will be given a `DateTime` object, to which you need to assign a list of events.
+You can supply custom events to **TableCalendar** widget. To do so, use `eventLoader` property - you will be given a `NepaliDateTime ` object, to which you need to assign a list of events.
 
 ```dart
 eventLoader: (day) {
@@ -111,17 +111,17 @@ eventLoader: (day) {
 },
 ```
 
-`_getEventsForDay()` can be of any implementation. For example, a `Map<DateTime, List<T>>` can be used:
+`_getEventsForDay()` can be of any implementation. For example, a `Map<NepaliDateTime , List<T>>` can be used:
 
 ```dart
-List<Event> _getEventsForDay(DateTime day) {
+List<Event> _getEventsForDay(NepaliDateTime  day) {
   return events[day] ?? [];
 }
 ```
 
-One thing worth remembering is that `DateTime` objects consist of both date and time parts. In many cases this time part is redundant for calendar related aspects. 
+One thing worth remembering is that `NepaliDateTime ` objects consist of both date and time parts. In many cases this time part is redundant for calendar related aspects. 
 
-If you decide to use a `Map`, I suggest making it a `LinkedHashMap` - this will allow you to override equality comparison for two `DateTime` objects, comparing them just by their date parts:
+If you decide to use a `Map`, I suggest making it a `LinkedHashMap` - this will allow you to override equality comparison for two `NepaliDateTime ` objects, comparing them just by their date parts:
 
 ```dart
 final events = LinkedHashMap(
@@ -136,7 +136,7 @@ final events = LinkedHashMap(
 
 ```dart
 eventLoader: (day) {
-  if (day.weekday == DateTime.monday) {
+  if (day.weekday == NepaliDateTime .monday) {
     return [Event('Cyclic event')];
   }
 
@@ -149,7 +149,7 @@ eventLoader: (day) {
 Often times having a sublist of events that are selected by tapping on a day is desired. You can achieve that by using the same method you provided to `eventLoader` inside of `onDaySelected` callback:
 
 ```dart
-void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+void _onDaySelected(NepaliDateTime  selectedDay, NepaliDateTime  focusedDay) {
   if (!isSameDay(_selectedDay, selectedDay)) {
     setState(() {
       _focusedDay = focusedDay;
@@ -171,7 +171,7 @@ You can return `null` from any builder to use the default style. For example, th
 ```dart
 calendarBuilders: CalendarBuilders(
   dowBuilder: (context, day) {
-    if (day.weekday == DateTime.sunday) {
+    if (day.weekday == NepaliDateTime .sunday) {
       final text = DateFormat.E().format(day);
 
       return Center(
