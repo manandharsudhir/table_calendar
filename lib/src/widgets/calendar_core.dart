@@ -2,17 +2,18 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import 'package:flutter/material.dart';
+import 'package:nepali_utils/nepali_utils.dart';
 
 import '../shared/utils.dart';
 import 'calendar_page.dart';
 
 typedef _OnCalendarPageChanged = void Function(
-    int pageIndex, NepaliDateTime  focusedDay);
+    int pageIndex, NepaliDateTime focusedDay);
 
 class CalendarCore extends StatelessWidget {
-  final NepaliDateTime ? focusedDay;
-  final NepaliDateTime  firstDay;
-  final NepaliDateTime  lastDay;
+  final NepaliDateTime? focusedDay;
+  final NepaliDateTime firstDay;
+  final NepaliDateTime lastDay;
   final CalendarFormat calendarFormat;
   final DayBuilder? dowBuilder;
   final DayBuilder? weekNumberBuilder;
@@ -91,7 +92,7 @@ class CalendarCore extends StatelessWidget {
             );
           },
           dayBuilder: (context, day) {
-            NepaliDateTime  baseDay;
+            NepaliDateTime baseDay;
             final previousFocusedDay = focusedDay;
             if (previousFocusedDay == null || previousIndex == null) {
               baseDay = _getBaseDay(calendarFormat, index);
@@ -116,7 +117,7 @@ class CalendarCore extends StatelessWidget {
         );
       },
       onPageChanged: (index) {
-        NepaliDateTime  baseDay;
+        NepaliDateTime baseDay;
         final previousFocusedDay = focusedDay;
         if (previousFocusedDay == null || previousIndex == null) {
           baseDay = _getBaseDay(calendarFormat, index);
@@ -129,7 +130,8 @@ class CalendarCore extends StatelessWidget {
     );
   }
 
-  int _getPageCount(CalendarFormat format, NepaliDateTime  first, NepaliDateTime  last) {
+  int _getPageCount(
+      CalendarFormat format, NepaliDateTime first, NepaliDateTime last) {
     switch (format) {
       case CalendarFormat.month:
         return _getMonthCount(first, last) + 1;
@@ -142,40 +144,41 @@ class CalendarCore extends StatelessWidget {
     }
   }
 
-  int _getMonthCount(NepaliDateTime  first, NepaliDateTime  last) {
+  int _getMonthCount(NepaliDateTime first, NepaliDateTime last) {
     final yearDif = last.year - first.year;
     final monthDif = last.month - first.month;
 
     return yearDif * 12 + monthDif;
   }
 
-  int _getWeekCount(NepaliDateTime  first, NepaliDateTime  last) {
+  int _getWeekCount(NepaliDateTime first, NepaliDateTime last) {
     return last.difference(_firstDayOfWeek(first)).inDays ~/ 7;
   }
 
-  int _getTwoWeekCount(NepaliDateTime  first, NepaliDateTime  last) {
+  int _getTwoWeekCount(NepaliDateTime first, NepaliDateTime last) {
     return last.difference(_firstDayOfWeek(first)).inDays ~/ 14;
   }
 
-  NepaliDateTime  _getFocusedDay(
-      CalendarFormat format, NepaliDateTime  prevFocusedDay, int pageIndex) {
+  NepaliDateTime _getFocusedDay(
+      CalendarFormat format, NepaliDateTime prevFocusedDay, int pageIndex) {
     if (pageIndex == previousIndex) {
       return prevFocusedDay;
     }
 
     final pageDif = pageIndex - previousIndex!;
-    NepaliDateTime  day;
+    NepaliDateTime day;
 
     switch (format) {
       case CalendarFormat.month:
-        day = NepaliDateTime .utc(prevFocusedDay.year, prevFocusedDay.month + pageDif);
+        day =
+            NepaliDateTime(prevFocusedDay.year, prevFocusedDay.month + pageDif);
         break;
       case CalendarFormat.twoWeeks:
-        day = NepaliDateTime .utc(prevFocusedDay.year, prevFocusedDay.month,
+        day = NepaliDateTime(prevFocusedDay.year, prevFocusedDay.month,
             prevFocusedDay.day + pageDif * 14);
         break;
       case CalendarFormat.week:
-        day = NepaliDateTime .utc(prevFocusedDay.year, prevFocusedDay.month,
+        day = NepaliDateTime(prevFocusedDay.year, prevFocusedDay.month,
             prevFocusedDay.day + pageDif * 7);
         break;
     }
@@ -189,19 +192,19 @@ class CalendarCore extends StatelessWidget {
     return day;
   }
 
-  NepaliDateTime  _getBaseDay(CalendarFormat format, int pageIndex) {
-    NepaliDateTime  day;
+  NepaliDateTime _getBaseDay(CalendarFormat format, int pageIndex) {
+    NepaliDateTime day;
 
     switch (format) {
       case CalendarFormat.month:
-        day = NepaliDateTime .utc(firstDay.year, firstDay.month + pageIndex);
+        day = NepaliDateTime(firstDay.year, firstDay.month + pageIndex);
         break;
       case CalendarFormat.twoWeeks:
-        day = NepaliDateTime .utc(
+        day = NepaliDateTime(
             firstDay.year, firstDay.month, firstDay.day + pageIndex * 14);
         break;
       case CalendarFormat.week:
-        day = NepaliDateTime .utc(
+        day = NepaliDateTime(
             firstDay.year, firstDay.month, firstDay.day + pageIndex * 7);
         break;
     }
@@ -215,7 +218,8 @@ class CalendarCore extends StatelessWidget {
     return day;
   }
 
-  NepaliDateTime Range _getVisibleRange(CalendarFormat format, NepaliDateTime  focusedDay) {
+  DateTimeRange _getVisibleRange(
+      CalendarFormat format, NepaliDateTime focusedDay) {
     switch (format) {
       case CalendarFormat.month:
         return _daysInMonth(focusedDay);
@@ -228,62 +232,62 @@ class CalendarCore extends StatelessWidget {
     }
   }
 
-  NepaliDateTime Range _daysInWeek(NepaliDateTime  focusedDay) {
+  DateTimeRange _daysInWeek(NepaliDateTime focusedDay) {
     final daysBefore = _getDaysBefore(focusedDay);
     final firstToDisplay = focusedDay.subtract(Duration(days: daysBefore));
     final lastToDisplay = firstToDisplay.add(const Duration(days: 7));
-    return NepaliDateTime Range(start: firstToDisplay, end: lastToDisplay);
+    return DateTimeRange(start: firstToDisplay, end: lastToDisplay);
   }
 
-  NepaliDateTime Range _daysInTwoWeeks(NepaliDateTime  focusedDay) {
+  DateTimeRange _daysInTwoWeeks(NepaliDateTime focusedDay) {
     final daysBefore = _getDaysBefore(focusedDay);
     final firstToDisplay = focusedDay.subtract(Duration(days: daysBefore));
     final lastToDisplay = firstToDisplay.add(const Duration(days: 14));
-    return NepaliDateTime Range(start: firstToDisplay, end: lastToDisplay);
+    return DateTimeRange(start: firstToDisplay, end: lastToDisplay);
   }
 
-  NepaliDateTime Range _daysInMonth(NepaliDateTime  focusedDay) {
+  DateTimeRange _daysInMonth(NepaliDateTime focusedDay) {
     final first = _firstDayOfMonth(focusedDay);
     final daysBefore = _getDaysBefore(first);
     final firstToDisplay = first.subtract(Duration(days: daysBefore));
 
     if (sixWeekMonthsEnforced) {
       final end = firstToDisplay.add(const Duration(days: 42));
-      return NepaliDateTime Range(start: firstToDisplay, end: end);
+      return DateTimeRange(start: firstToDisplay, end: end);
     }
 
     final last = _lastDayOfMonth(focusedDay);
     final daysAfter = _getDaysAfter(last);
     final lastToDisplay = last.add(Duration(days: daysAfter));
 
-    return NepaliDateTime Range(start: firstToDisplay, end: lastToDisplay);
+    return DateTimeRange(start: firstToDisplay, end: lastToDisplay);
   }
 
-  List<NepaliDateTime > _daysInRange(NepaliDateTime  first, NepaliDateTime  last) {
+  List<NepaliDateTime> _daysInRange(DateTime first, DateTime last) {
     final dayCount = last.difference(first).inDays + 1;
     return List.generate(
       dayCount,
-      (index) => NepaliDateTime .utc(first.year, first.month, first.day + index),
+      (index) => NepaliDateTime(first.year, first.month, first.day + index),
     );
   }
 
-  NepaliDateTime  _firstDayOfWeek(NepaliDateTime  week) {
+  NepaliDateTime _firstDayOfWeek(NepaliDateTime week) {
     final daysBefore = _getDaysBefore(week);
     return week.subtract(Duration(days: daysBefore));
   }
 
-  NepaliDateTime  _firstDayOfMonth(NepaliDateTime  month) {
-    return NepaliDateTime .utc(month.year, month.month, 1);
+  NepaliDateTime _firstDayOfMonth(NepaliDateTime month) {
+    return NepaliDateTime(month.year, month.month, 1);
   }
 
-  NepaliDateTime  _lastDayOfMonth(NepaliDateTime  month) {
+  NepaliDateTime _lastDayOfMonth(NepaliDateTime month) {
     final date = month.month < 12
-        ? NepaliDateTime .utc(month.year, month.month + 1, 1)
-        : NepaliDateTime .utc(month.year + 1, 1, 1);
+        ? NepaliDateTime(month.year, month.month + 1, 1)
+        : NepaliDateTime(month.year + 1, 1, 1);
     return date.subtract(const Duration(days: 1));
   }
 
-  int _getRowCount(CalendarFormat format, NepaliDateTime  focusedDay) {
+  int _getRowCount(CalendarFormat format, NepaliDateTime focusedDay) {
     if (format == CalendarFormat.twoWeeks) {
       return 2;
     } else if (format == CalendarFormat.week) {
@@ -303,11 +307,11 @@ class CalendarCore extends StatelessWidget {
     return (lastToDisplay.difference(firstToDisplay).inDays + 1) ~/ 7;
   }
 
-  int _getDaysBefore(NepaliDateTime  firstDay) {
+  int _getDaysBefore(NepaliDateTime firstDay) {
     return (firstDay.weekday + 7 - getWeekdayNumber(startingDayOfWeek)) % 7;
   }
 
-  int _getDaysAfter(NepaliDateTime  lastDay) {
+  int _getDaysAfter(NepaliDateTime lastDay) {
     int invertedStartingWeekday = 8 - getWeekdayNumber(startingDayOfWeek);
 
     int daysAfter = 7 - ((lastDay.weekday + invertedStartingWeekday) % 7);

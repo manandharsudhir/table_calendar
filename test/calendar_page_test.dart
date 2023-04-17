@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:nepali_utils/nepali_utils.dart';
 import 'package:table_calendar/src/widgets/calendar_page.dart';
 
 Widget setupTestWidget(Widget child) {
@@ -14,15 +15,15 @@ Widget setupTestWidget(Widget child) {
 }
 
 List<NepaliDateTime> visibleDays = getDaysInRange(
-  NepaliDateTime.utc(2021, 6, 27),
-  NepaliDateTime.utc(2021, 7, 31),
+  NepaliDateTime(2021, 6, 27),
+  NepaliDateTime(2021, 7, 31),
 );
 
 List<NepaliDateTime> getDaysInRange(NepaliDateTime first, NepaliDateTime last) {
   final dayCount = last.difference(first).inDays + 1;
   return List.generate(
     dayCount,
-    (index) => NepaliDateTime.utc(first.year, first.month, first.day + index),
+    (index) => NepaliDateTime(first.year, first.month, first.day + index),
   );
 }
 

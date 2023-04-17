@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:nepali_utils/nepali_utils.dart';
 import 'package:table_calendar/src/shared/utils.dart';
 
 void main() {
@@ -21,7 +22,7 @@ void main() {
     });
 
     test('UTC and local time zone', () {
-      final dateA = NepaliDateTime.utc(2020, 5, 10);
+      final dateA = NepaliDateTime(2020, 5, 10);
       final dateB = NepaliDateTime(2020, 5, 10);
 
       expect(isSameDay(dateA, dateB), true);

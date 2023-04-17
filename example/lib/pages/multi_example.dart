@@ -8,6 +8,8 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../utils.dart';
 
+import 'package:nepali_utils/nepali_utils.dart';
+
 class TableMultiExample extends StatefulWidget {
   @override
   _TableMultiExampleState createState() => _TableMultiExampleState();

@@ -5,6 +5,7 @@ import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:nepali_utils/nepali_utils.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
 import 'customization/calendar_builders.dart';
@@ -214,7 +215,7 @@ class TableCalendar<T> extends StatefulWidget {
     this.locale,
     this.rangeStartDay,
     this.rangeEndDay,
-    this.weekendDays = const [NepaliDateTime.saturday, NepaliDateTime.sunday],
+    this.weekendDays = const [DateTime.saturday, DateTime.sunday],
     this.calendarFormat = CalendarFormat.month,
     this.availableCalendarFormats = const {
       CalendarFormat.month: 'Month',
@@ -263,8 +264,8 @@ class TableCalendar<T> extends StatefulWidget {
   })  : assert(availableCalendarFormats.keys.contains(calendarFormat)),
         assert(availableCalendarFormats.length <= CalendarFormat.values.length),
         assert(weekendDays.isNotEmpty
-            ? weekendDays.every((day) =>
-                day >= NepaliDateTime.monday && day <= NepaliDateTime.sunday)
+            ? weekendDays.every(
+                (day) => day >= DateTime.monday && day <= DateTime.sunday)
             : true),
         focusedDay = normalizeDate(focusedDay),
         firstDay = normalizeDate(firstDay),
@@ -715,7 +716,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
 
   int _dayOfYear(NepaliDateTime date) {
     return normalizeDate(date)
-            .difference(NepaliDateTime.utc(date.year, 1, 1))
+            .difference(NepaliDateTime(date.year, 1, 1))
             .inDays +
         1;
   }
@@ -746,13 +747,13 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
   }
 
   NepaliDateTime _firstDayOfMonth(NepaliDateTime month) {
-    return NepaliDateTime.utc(month.year, month.month, 1);
+    return NepaliDateTime(month.year, month.month, 1);
   }
 
   NepaliDateTime _lastDayOfMonth(NepaliDateTime month) {
     final date = month.month < 12
-        ? NepaliDateTime.utc(month.year, month.month + 1, 1)
-        : NepaliDateTime.utc(month.year + 1, 1, 1);
+        ? NepaliDateTime(month.year, month.month + 1, 1)
+        : NepaliDateTime(month.year + 1, 1, 1);
     return date.subtract(const Duration(days: 1));
   }
 
@@ -774,10 +775,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
 
   bool _isWeekend(
     NepaliDateTime day, {
-    List<int> weekendDays = const [
-      NepaliDateTime.saturday,
-      NepaliDateTime.sunday
-    ],
+    List<int> weekendDays = const [DateTime.saturday, DateTime.sunday],
   }) {
     return weekendDays.contains(day.weekday);
   }

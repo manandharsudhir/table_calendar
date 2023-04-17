@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:nepali_utils/nepali_utils.dart';
 import 'package:table_calendar/src/customization/header_style.dart';
 import 'package:table_calendar/src/shared/utils.dart';
 import 'package:table_calendar/src/widgets/calendar_header.dart';
@@ -12,7 +13,7 @@ import 'package:table_calendar/src/widgets/format_button.dart';
 
 import 'common.dart';
 
-final focusedMonth = NepaliDateTime.utc(2021, 7, 15);
+final focusedMonth = NepaliDateTime(2021, 7, 15);
 
 Widget setupTestWidget({
   HeaderStyle headerStyle = const HeaderStyle(),

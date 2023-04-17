@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import 'package:flutter/widgets.dart';
+import 'package:nepali_utils/nepali_utils.dart';
 
 /// Signature for a function that creates a widget for a given `day`.
 typedef DayBuilder = Widget? Function(BuildContext context, NepaliDateTime day);
@@ -40,7 +41,7 @@ int getWeekdayNumber(StartingDayOfWeek weekday) {
 
 /// Returns `date` in UTC format, without its time part.
 NepaliDateTime normalizeDate(NepaliDateTime date) {
-  return NepaliDateTime.utc(date.year, date.month, date.day);
+  return NepaliDateTime(date.year, date.month, date.day);
 }
 
 /// Checks if two NepaliDateTime  objects are the same day.

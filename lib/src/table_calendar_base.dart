@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import 'package:flutter/material.dart';
+import 'package:nepali_utils/nepali_utils.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
 import 'shared/utils.dart';
@@ -336,13 +337,13 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
   }
 
   NepaliDateTime _firstDayOfMonth(NepaliDateTime month) {
-    return NepaliDateTime.utc(month.year, month.month, 1);
+    return NepaliDateTime(month.year, month.month, 1);
   }
 
   NepaliDateTime _lastDayOfMonth(NepaliDateTime month) {
     final date = month.month < 12
-        ? NepaliDateTime.utc(month.year, month.month + 1, 1)
-        : NepaliDateTime.utc(month.year + 1, 1, 1);
+        ? NepaliDateTime(month.year, month.month + 1, 1)
+        : NepaliDateTime(month.year + 1, 1, 1);
     return date.subtract(const Duration(days: 1));
   }
 }

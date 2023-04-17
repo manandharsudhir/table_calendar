@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import 'package:nepali_utils/nepali_utils.dart';
 import '../utils.dart';
 
 class TableComplexExample extends StatefulWidget {

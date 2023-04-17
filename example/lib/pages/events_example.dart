@@ -6,6 +6,8 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../utils.dart';
 
+import 'package:nepali_utils/nepali_utils.dart';
+
 class TableEventsExample extends StatefulWidget {
   @override
   _TableEventsExampleState createState() => _TableEventsExampleState();

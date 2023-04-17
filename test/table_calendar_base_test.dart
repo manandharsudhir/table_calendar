@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:nepali_utils/nepali_utils.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -21,13 +22,13 @@ void main() {
     testWidgets(
       'in month format, starting day is Sunday',
       (tester) async {
-        final focusedDay = NepaliDateTime.utc(2021, 7, 15);
+        final focusedDay = NepaliDateTime(2021, 7, 15);
 
         await tester.pumpWidget(
           setupTestWidget(
             TableCalendarBase(
-              firstDay: NepaliDateTime.utc(2021, 5, 15),
-              lastDay: NepaliDateTime.utc(2021, 8, 18),
+              firstDay: NepaliDateTime(2021, 5, 15),
+              lastDay: NepaliDateTime(2021, 8, 18),
               focusedDay: focusedDay,
               dayBuilder: (context, day, focusedDay) {
                 return Text(
@@ -43,8 +44,8 @@ void main() {
           ),
         );
 
-        final firstVisibleDay = NepaliDateTime.utc(2021, 6, 27);
-        final lastVisibleDay = NepaliDateTime.utc(2021, 7, 31);
+        final firstVisibleDay = NepaliDateTime(2021, 6, 27);
+        final lastVisibleDay = NepaliDateTime(2021, 7, 31);
 
         final focusedDayKey = dateToKey(focusedDay);
         final firstVisibleDayKey = dateToKey(firstVisibleDay);
@@ -67,13 +68,13 @@ void main() {
     testWidgets(
       'in two weeks format, starting day is Sunday',
       (tester) async {
-        final focusedDay = NepaliDateTime.utc(2021, 7, 15);
+        final focusedDay = NepaliDateTime(2021, 7, 15);
 
         await tester.pumpWidget(
           setupTestWidget(
             TableCalendarBase(
-              firstDay: NepaliDateTime.utc(2021, 5, 15),
-              lastDay: NepaliDateTime.utc(2021, 8, 18),
+              firstDay: NepaliDateTime(2021, 5, 15),
+              lastDay: NepaliDateTime(2021, 8, 18),
               focusedDay: focusedDay,
               dayBuilder: (context, day, focusedDay) {
                 return Text(
@@ -89,8 +90,8 @@ void main() {
           ),
         );
 
-        final firstVisibleDay = NepaliDateTime.utc(2021, 7, 4);
-        final lastVisibleDay = NepaliDateTime.utc(2021, 7, 17);
+        final firstVisibleDay = NepaliDateTime(2021, 7, 4);
+        final lastVisibleDay = NepaliDateTime(2021, 7, 17);
 
         final focusedDayKey = dateToKey(focusedDay);
         final firstVisibleDayKey = dateToKey(firstVisibleDay);
@@ -113,13 +114,13 @@ void main() {
     testWidgets(
       'in week format, starting day is Sunday',
       (tester) async {
-        final focusedDay = NepaliDateTime.utc(2021, 7, 15);
+        final focusedDay = NepaliDateTime(2021, 7, 15);
 
         await tester.pumpWidget(
           setupTestWidget(
             TableCalendarBase(
-              firstDay: NepaliDateTime.utc(2021, 5, 15),
-              lastDay: NepaliDateTime.utc(2021, 8, 18),
+              firstDay: NepaliDateTime(2021, 5, 15),
+              lastDay: NepaliDateTime(2021, 8, 18),
               focusedDay: focusedDay,
               dayBuilder: (context, day, focusedDay) {
                 return Text(
@@ -135,8 +136,8 @@ void main() {
           ),
         );
 
-        final firstVisibleDay = NepaliDateTime.utc(2021, 7, 11);
-        final lastVisibleDay = NepaliDateTime.utc(2021, 7, 17);
+        final firstVisibleDay = NepaliDateTime(2021, 7, 11);
+        final lastVisibleDay = NepaliDateTime(2021, 7, 17);
 
         final focusedDayKey = dateToKey(focusedDay);
         final firstVisibleDayKey = dateToKey(firstVisibleDay);
@@ -159,13 +160,13 @@ void main() {
     testWidgets(
       'in month format, starting day is Monday',
       (tester) async {
-        final focusedDay = NepaliDateTime.utc(2021, 7, 15);
+        final focusedDay = NepaliDateTime(2021, 7, 15);
 
         await tester.pumpWidget(
           setupTestWidget(
             TableCalendarBase(
-              firstDay: NepaliDateTime.utc(2021, 5, 15),
-              lastDay: NepaliDateTime.utc(2021, 8, 18),
+              firstDay: NepaliDateTime(2021, 5, 15),
+              lastDay: NepaliDateTime(2021, 8, 18),
               focusedDay: focusedDay,
               dayBuilder: (context, day, focusedDay) {
                 return Text(
@@ -181,8 +182,8 @@ void main() {
           ),
         );
 
-        final firstVisibleDay = NepaliDateTime.utc(2021, 6, 28);
-        final lastVisibleDay = NepaliDateTime.utc(2021, 8, 1);
+        final firstVisibleDay = NepaliDateTime(2021, 6, 28);
+        final lastVisibleDay = NepaliDateTime(2021, 8, 1);
 
         final focusedDayKey = dateToKey(focusedDay);
         final firstVisibleDayKey = dateToKey(firstVisibleDay);
@@ -205,13 +206,13 @@ void main() {
     testWidgets(
       'in two weeks format, starting day is Monday',
       (tester) async {
-        final focusedDay = NepaliDateTime.utc(2021, 7, 15);
+        final focusedDay = NepaliDateTime(2021, 7, 15);
 
         await tester.pumpWidget(
           setupTestWidget(
             TableCalendarBase(
-              firstDay: NepaliDateTime.utc(2021, 5, 15),
-              lastDay: NepaliDateTime.utc(2021, 8, 18),
+              firstDay: NepaliDateTime(2021, 5, 15),
+              lastDay: NepaliDateTime(2021, 8, 18),
               focusedDay: focusedDay,
               dayBuilder: (context, day, focusedDay) {
                 return Text(
@@ -227,8 +228,8 @@ void main() {
           ),
         );
 
-        final firstVisibleDay = NepaliDateTime.utc(2021, 7, 5);
-        final lastVisibleDay = NepaliDateTime.utc(2021, 7, 18);
+        final firstVisibleDay = NepaliDateTime(2021, 7, 5);
+        final lastVisibleDay = NepaliDateTime(2021, 7, 18);
 
         final focusedDayKey = dateToKey(focusedDay);
         final firstVisibleDayKey = dateToKey(firstVisibleDay);
@@ -251,13 +252,13 @@ void main() {
     testWidgets(
       'in week format, starting day is Monday',
       (tester) async {
-        final focusedDay = NepaliDateTime.utc(2021, 7, 15);
+        final focusedDay = NepaliDateTime(2021, 7, 15);
 
         await tester.pumpWidget(
           setupTestWidget(
             TableCalendarBase(
-              firstDay: NepaliDateTime.utc(2021, 5, 15),
-              lastDay: NepaliDateTime.utc(2021, 8, 18),
+              firstDay: NepaliDateTime(2021, 5, 15),
+              lastDay: NepaliDateTime(2021, 8, 18),
               focusedDay: focusedDay,
               dayBuilder: (context, day, focusedDay) {
                 return Text(
@@ -273,8 +274,8 @@ void main() {
           ),
         );
 
-        final firstVisibleDay = NepaliDateTime.utc(2021, 7, 12);
-        final lastVisibleDay = NepaliDateTime.utc(2021, 7, 18);
+        final firstVisibleDay = NepaliDateTime(2021, 7, 12);
+        final lastVisibleDay = NepaliDateTime(2021, 7, 18);
 
         final focusedDayKey = dateToKey(focusedDay);
         final firstVisibleDayKey = dateToKey(firstVisibleDay);
@@ -298,7 +299,7 @@ void main() {
   testWidgets(
     'Callbacks return expected values',
     (tester) async {
-      NepaliDateTime focusedDay = NepaliDateTime.utc(2021, 7, 15);
+      NepaliDateTime focusedDay = NepaliDateTime(2021, 7, 15);
       final nextMonth = focusedDay.add(const Duration(days: 31)).month;
 
       bool calendarCreatedFlag = false;
@@ -307,8 +308,8 @@ void main() {
       await tester.pumpWidget(
         setupTestWidget(
           TableCalendarBase(
-            firstDay: NepaliDateTime.utc(2021, 5, 15),
-            lastDay: NepaliDateTime.utc(2021, 8, 18),
+            firstDay: NepaliDateTime(2021, 5, 15),
+            lastDay: NepaliDateTime(2021, 8, 18),
             focusedDay: focusedDay,
             dayBuilder: (context, day, focusedDay) {
               return Text(
@@ -358,9 +359,9 @@ void main() {
         await tester.pumpWidget(
           setupTestWidget(
             TableCalendarBase(
-              firstDay: NepaliDateTime.utc(2021, 5, 15),
-              lastDay: NepaliDateTime.utc(2021, 8, 18),
-              focusedDay: NepaliDateTime.utc(2021, 7, 15),
+              firstDay: NepaliDateTime(2021, 5, 15),
+              lastDay: NepaliDateTime(2021, 8, 18),
+              focusedDay: NepaliDateTime(2021, 7, 15),
               dayBuilder: (context, day, focusedDay) {
                 return Text(
                   '${day.day}',

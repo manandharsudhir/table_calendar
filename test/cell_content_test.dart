@@ -3,6 +3,7 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:nepali_utils/nepali_utils.dart';
 import 'package:table_calendar/src/widgets/cell_content.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -55,7 +56,7 @@ void main() {
         },
       );
 
-      final cellDay = NepaliDateTime.utc(2021, 7, 15);
+      final cellDay = NepaliDateTime(2021, 7, 15);
       expect(builderDay, isNull);
 
       await tester.pumpWidget(
@@ -79,7 +80,7 @@ void main() {
         },
       );
 
-      final cellDay = NepaliDateTime.utc(2021, 7, 15);
+      final cellDay = NepaliDateTime(2021, 7, 15);
       expect(builderDay, isNull);
 
       await tester.pumpWidget(
@@ -103,7 +104,7 @@ void main() {
         },
       );
 
-      final cellDay = NepaliDateTime.utc(2021, 7, 15);
+      final cellDay = NepaliDateTime(2021, 7, 15);
       expect(builderDay, isNull);
 
       await tester.pumpWidget(
@@ -127,7 +128,7 @@ void main() {
         },
       );
 
-      final cellDay = NepaliDateTime.utc(2021, 7, 15);
+      final cellDay = NepaliDateTime(2021, 7, 15);
       expect(builderDay, isNull);
 
       await tester.pumpWidget(
@@ -151,7 +152,7 @@ void main() {
         },
       );
 
-      final cellDay = NepaliDateTime.utc(2021, 7, 15);
+      final cellDay = NepaliDateTime(2021, 7, 15);
       expect(builderDay, isNull);
 
       await tester.pumpWidget(
@@ -175,7 +176,7 @@ void main() {
         },
       );
 
-      final cellDay = NepaliDateTime.utc(2021, 7, 15);
+      final cellDay = NepaliDateTime(2021, 7, 15);
       expect(builderDay, isNull);
 
       await tester.pumpWidget(
@@ -199,7 +200,7 @@ void main() {
         },
       );
 
-      final cellDay = NepaliDateTime.utc(2021, 7, 15);
+      final cellDay = NepaliDateTime(2021, 7, 15);
       expect(builderDay, isNull);
 
       await tester.pumpWidget(
@@ -225,7 +226,7 @@ void main() {
           },
         );
 
-        final cellDay = NepaliDateTime.utc(2021, 7, 15);
+        final cellDay = NepaliDateTime(2021, 7, 15);
         expect(builderDay, isNull);
 
         await tester.pumpWidget(
@@ -258,7 +259,7 @@ void main() {
           },
         );
 
-        final cellDay = NepaliDateTime.utc(2021, 7, 15);
+        final cellDay = NepaliDateTime(2021, 7, 15);
         expect(builderDay, isNull);
 
         await tester.pumpWidget(
@@ -294,7 +295,7 @@ void main() {
           },
         );
 
-        final cellDay = NepaliDateTime.utc(2021, 7, 15);
+        final cellDay = NepaliDateTime(2021, 7, 15);
         expect(builderDay, isNull);
 
         await tester.pumpWidget(

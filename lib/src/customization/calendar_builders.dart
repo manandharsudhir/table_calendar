@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import 'package:flutter/widgets.dart';
+import 'package:nepali_utils/nepali_utils.dart';
 
 import '../shared/utils.dart' show DayBuilder, FocusedDayBuilder;
 
